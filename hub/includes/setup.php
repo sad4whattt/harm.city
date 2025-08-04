@@ -41,4 +41,17 @@ runMigration($db, $alterUsersTableCreatedAtSQL, "'created_at' column ensured in 
 
 echo "<p style='color: blue;'>Database setup complete. You can now delete or secure this file.</p>";
 
+$createEndpointsTableSQL = "
+CREATE TABLE IF NOT EXISTS endpoints (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    url VARCHAR(512) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    last_checked DATETIME NULL,
+    last_status VARCHAR(16) NULL,
+    interval_seconds INT NOT NULL DEFAULT 300,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);";
+runMigration($db, $createEndpointsTableSQL, "'endpoints' table ensured.", "Error creating/ensuring 'endpoints' table");
+
 ?>

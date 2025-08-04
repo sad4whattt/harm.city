@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 $base_url = '/hub';
@@ -13,8 +14,8 @@ function is_active($page) {
     $current_page = basename($_SERVER['PHP_SELF']);
     return $current_page == $page ? 'text-primary' : 'hover:text-primary transition';
 }
-?>
-<!DOCTYPE html>
+
+?><!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
